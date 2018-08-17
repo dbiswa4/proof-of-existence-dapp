@@ -60,4 +60,39 @@ contract('ProofOfExistence contract functionalities testing', function(accounts)
         })
     });
 
+    //Test#4
+    it('Test : User Usage Rate Limiting - Multiple documents by multiple users',function(){
+        let docHash_1 = 0xff635631b30d2e777fe163f46ed76b398c06ff3c3ee1de335dfe1e30b14e4faf;
+        let docHash_2 = 0x340fa3ff9bb3f74457255e241750a9e9e6a6c945cc6292a378a56efbdc53ac15;
+        let docHash_3 = 0x094c8923cc85b2914c65315ae27d173aa20eca02f1bcab0e523206d0ee83a26a;
+        let docHash_4 = 0xd54bfd00b4dea3abc3cbe210eff7fff6387d43c1a54c97f16a37154036d51fc9;
+        
+        let ipfsHash_1 = "QmUd5cKE6843KMEtnFQ9CvfHUKfzQ4E1VSsj1ihkHBgk7i";
+        let ipfsHash_2 = "QmUd5cKE6843KMEtnFQ9CvfHUKfzQ4E1VSsj1ihkHBgk7j";
+        let ipfsHash_3 = "QmUd5cKE6843KMEtnFQ9CvfHUKfzQ4E1VSsj1ihkHBgk7k";
+        let ipfsHash_4 = "QmUd5cKE6843KMEtnFQ9CvfHUKfzQ4E1VSsj1ihkHBgk7l";
+
+        let docOwnerName = "DB";
+
+        let account_one = accounts[1];
+        let account_two = accounts[2];
+        let account_three = accounts[3];
+
+        return ProofOfExistence.deployed().then(function(instance){
+            // only 3 documents can be uploaded by a user with in 2 minutes time window
+            // the fourth document should not be loaded in to blockchain
+            instance.uploadDocument(docHash_1,docOwnerName,ipfsHash_1,{from:account_one});
+            instance.uploadDocument(docHash_2,docOwnerName,ipfsHash_2,{from:account_two});
+            instance.uploadDocument(docHash_3,docOwnerName,ipfsHash_3,{from:account_three});
+            instance.uploadDocument(docHash_4,docOwnerName,ipfsHash_4,{from:account_one});
+
+            return instance.fetchDocument.call(docHash_2,{from:account_one});
+        }).then(function(result){
+            //console.log(result);
+            let expected = docHash_2;
+            let actual = result[0];
+            assert.equal( actual,expected,'4 documents in 2 min, but 3 different users, which is fine');
+        })
+    });
+
 })
