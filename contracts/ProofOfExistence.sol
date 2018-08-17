@@ -1,5 +1,7 @@
 pragma solidity ^0.4.18;
 
+import "./Mortal.sol";
+
 contract ProofOfExistence is Mortal{
 
     mapping(address => bool) admins;
@@ -40,7 +42,7 @@ contract ProofOfExistence is Mortal{
 
 
     //Events for logging
-    event LogUploadDocument(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash);
+    event LogUploadDocument(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
     event LogAssignAdmin(address _sender, string _message);
 
     //Modifiers
@@ -85,15 +87,16 @@ contract ProofOfExistence is Mortal{
     public
     stopInEmergency 
     returns(bool) {
-        UserUsageCount storage userUploadStats = usersUsage[_addr];
-        UploadChoices choice = verifyRateLimit(msg.sender, userUploadStats);
+        //UserUsageCount storage userUploadStats = usersUsage[msg.sender];
+        UploadChoices choice = verifyRateLimit(msg.sender);
 
         if (choice == UploadChoices.UPLOAD_CNT_INCR) {
             updateOnChainData(_docHash,_userName,_ipfsHash);
-            usersUsage[msg.sender].time = now;
+            usersUsage[msg.sender].uploadTime = now;
             usersUsage[msg.sender].count = 1;
             //Log document upload event
             emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
+                                                       //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         } else if (choice == UploadChoices.UPLOAD_CNT_RESET) {
             updateOnChainData(_docHash,_userName,_ipfsHash);
             usersUsage[msg.sender].count += 1;
@@ -131,12 +134,19 @@ contract ProofOfExistence is Mortal{
 
     
     //verify whether user exceeded rate limit assigned
-    function verifyRateLimit(address _addr, UserUsageCount _userUploadStats)
+    /*
+    TypeError: This type is only supportedin the new experimental ABI encoder. 
+    Use "pragma experimental ABIEncoderV2;" to enable the feature.
+    */
+    //function verifyRateLimit(address _addr, UserUsageCount _userUploadStats)
+    function verifyRateLimit(address _addr)
     public
     view
     returns(UploadChoices) {
 
-        if(block.timestamp >= _userUploadStats.time + documentUploadPeriod){
+        //Do not like the duplication here, but get a compilation error if I pass it to this function
+        UserUsageCount storage _userUploadStats = usersUsage[_addr];
+        if(block.timestamp >= _userUploadStats.uploadTime + documentUploadPeriod){
             return UploadChoices.UPLOAD_CNT_RESET;
         } else {
             if(_userUploadStats.count >= documentLimit){
@@ -155,7 +165,8 @@ contract ProofOfExistence is Mortal{
         require(_docHash != 0, "Document Hash is mandatory");
         
         Document storage document = users[msg.sender].documentDetails[_docHash];
-        emit LogUploadDocument(msg.sender,users[msg.sender].userName,document.docHash, document.docTimestamp,document.ipfsHash);
+        emit LogUploadDocument(msg.sender,users[msg.sender].userName,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
+                                                //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         return(document.docHash,document.docTimestamp,document.ipfsHash);
     }
 
