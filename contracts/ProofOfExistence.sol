@@ -90,14 +90,14 @@ contract ProofOfExistence is Mortal{
         //UserUsageCount storage userUploadStats = usersUsage[msg.sender];
         UploadChoices choice = verifyRateLimit(msg.sender);
 
-        if (choice == UploadChoices.UPLOAD_CNT_INCR) {
+        if (choice == UploadChoices.UPLOAD_CNT_RESET) {
             updateOnChainData(_docHash,_userName,_ipfsHash);
             usersUsage[msg.sender].uploadTime = now;
             usersUsage[msg.sender].count = 1;
             //Log document upload event
             emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
-                                                       //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
-        } else if (choice == UploadChoices.UPLOAD_CNT_RESET) {
+                                                    //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
+        } else if (choice == UploadChoices.UPLOAD_CNT_INCR) {
             updateOnChainData(_docHash,_userName,_ipfsHash);
             usersUsage[msg.sender].count += 1;
             //Log document upload event
@@ -140,7 +140,7 @@ contract ProofOfExistence is Mortal{
     */
     //function verifyRateLimit(address _addr, UserUsageCount _userUploadStats)
     function verifyRateLimit(address _addr)
-    public
+    private
     view
     returns(UploadChoices) {
 
