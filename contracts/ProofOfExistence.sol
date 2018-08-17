@@ -8,6 +8,11 @@ contract ProofOfExistence is Mortal{
     uint documentUploadPeriod = 120 seconds;
     uint documentLimit = 3;
     bool private stopped = false;
+    
+    //Document upload actions. To be used for user throtling
+    enum UploadChoices { UPLOAD_CNT_INCR, UPLOAD_CNT_RESET, UPLOAD_NO }
+    UploadChoices uploadChoice;
+    UploadChoices constant defaultUploadChoice = UploadChoices.UPLOAD_NO;
 
     //Document idenfiers alongwith ipfs has of the document
     struct Document {
@@ -22,13 +27,14 @@ contract ProofOfExistence is Mortal{
         string userName;
         bytes32[] documentList;
         mapping(bytes32 => Document) documentDetails;
+        //uint lastUploadTimestamp;
     }
 
     mapping (address => User) users;
 
     //Maintain user usage count to implement throtlling
     struct UserUsageCount {
-        uint time;
+        uint uploadTime;
         uint count;
     }
 
@@ -79,37 +85,73 @@ contract ProofOfExistence is Mortal{
     public
     stopInEmergency 
     returns(bool) {
+        UserUsageCount storage userUploadStats = usersUsage[_addr];
+        UploadChoices choice = verifyRateLimit(msg.sender, userUploadStats);
+
+        if (choice == UploadChoices.UPLOAD_CNT_INCR) {
+            updateOnChainData(_docHash,_userName,_ipfsHash);
+            usersUsage[msg.sender].time = now;
+            usersUsage[msg.sender].count = 1;
+            //Log document upload event
+            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
+        } else if (choice == UploadChoices.UPLOAD_CNT_RESET) {
+            updateOnChainData(_docHash,_userName,_ipfsHash);
+            usersUsage[msg.sender].count += 1;
+            //Log document upload event
+            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success");
+
+        } else if (choice == UploadChoices.UPLOAD_NO){
+            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Not Success - throtling limit exceeded");
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    function updateOnChainData(bytes32 _docHash,string _userName,string _ipfsHash) 
+    private
+    returns(bool) {
         //check whether the document already exists in the blockchain
         //if the document does not exist then add the document details and return true
         //if the document already exists then do nothing and return false
+
+        //ToDo: Whether to move check for already existing case to throtling function?
+
         if(users[msg.sender].documentDetails[_docHash].docHash == 0){
             users[msg.sender].addr = msg.sender;
             users[msg.sender].userName = _userName;
             users[msg.sender].documentList.push(_docHash);
             users[msg.sender].documentDetails[_docHash] = Document(_docHash,block.timestamp,_ipfsHash);
-            
-            //Log document upload event
-            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash);
+            //users[msg.sender].lastUploadTimestamp = block.timestamp;
         }else {
             return false;
         }
         return true;
     }
 
-    /*
+    
     //verify whether user exceeded rate limit assigned
-    function verifyRateLimit()
+    function verifyRateLimit(address _addr, UserUsageCount _userUploadStats)
     public
-    returns(bool) {
-        //Input paramenters validation
-       //Document hash should not be empty and length should 256 bytes
-        UserUsageCount storage userUploadStats = usersUsage[msg.sender];
+    view
+    returns(UploadChoices) {
 
+        if(block.timestamp >= _userUploadStats.time + documentUploadPeriod){
+            return UploadChoices.UPLOAD_CNT_RESET;
+        } else {
+            if(_userUploadStats.count >= documentLimit){
+                return UploadChoices.UPLOAD_NO;
+            }else{
+                return UploadChoices.UPLOAD_CNT_INCR;
+            }
+        }
+        return defaultUploadChoice;
     }
-    */
 
-    function fetchDocument(bytes32 _docHash) public returns(bytes32, uint, string){
-
+    //Fetch documents
+    function fetchDocument(bytes32 _docHash) 
+    public 
+    returns(bytes32, uint, string){
         require(_docHash != 0, "Document Hash is mandatory");
         
         Document storage document = users[msg.sender].documentDetails[_docHash];
