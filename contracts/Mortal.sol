@@ -10,9 +10,10 @@ contract Owned {
 }
 
 contract Mortal is Owned {
-    
+
     function kill() public {
         require(msg.sender == owner, "Only owner can kill the contract");
+        //Return the balance Ether in the contract to the Owner of the contract
         selfdestruct(owner);
     }
 }
