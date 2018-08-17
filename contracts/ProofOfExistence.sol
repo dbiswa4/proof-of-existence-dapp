@@ -57,6 +57,7 @@ contract ProofOfExistence is Mortal{
         stopped = !stopped;
     }
 
+
     //Assign admin access
     function assignAdminAccess(address _address) public
     onlyOwner
@@ -69,6 +70,20 @@ contract ProofOfExistence is Mortal{
             emit LogAssignAdmin(_address,"Either user does not exists or already has Admin access");
         }
         return false;
+    }
+
+    //Revoke admin access
+    function revokeAdminAccess(address _address) public 
+    onlyOwner 
+    returns(bool){
+        if(admins[_address] == true){
+            delete admins[_address];
+            emit LogAssignAdmin(_address,"Admin Revoked");
+            return true;
+        }else{
+            emit LogAssignAdmin(_address,"Nothing to be removed. Account does not have Admin access");
+            return false;
+        }
     }
 
     //Verify whether a user is already admin

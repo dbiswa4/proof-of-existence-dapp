@@ -95,4 +95,48 @@ contract('ProofOfExistence contract functionalities testing', function(accounts)
         })
     });
 
+    //Test#5
+    it('Test :  Admin acces check',function(){
+        let owner = accounts[0];
+        return ProofOfExistence.deployed().then(instance=>{
+            return instance.isAdmin.call(owner,{from:accounts[0]});
+        }).then(result=>{
+            let expected = false;
+            let actual = result;
+            assert.equal(actual,expected,"Account is not Admin");
+        })
+    });
+
+    //Test#6
+    it('Test :  Assign Admin',function(){
+        let owner = accounts[0];
+        let newAddress = accounts[1]
+;        return ProofOfExistence.deployed().then(instance=>{
+            instance.assignAdminAccess(newAddress,{from:owner});
+            return instance.isAdmin.call(newAddress,{from:newAddress});
+        }).then(result=>{
+            let expected = true;
+            let actual = result;
+            assert.equal(actual,expected,"New account provided assigned as Admin");
+        })
+    });
+
+    //Test#7
+    it('Test :  Revoke Admin access',function(){
+        let owner = accounts[0];
+        let newAddress = accounts[1]
+;        return ProofOfExistence.deployed().then(instance=>{
+            instance.assignAdminAccess(newAddress,{from:owner});
+            instance.revokeAdminAccess(newAddress,{from:owner});
+            return instance.isAdmin.call(newAddress,{from:newAddress});
+        }).then(result=>{
+            let expected = false;
+            let actual = result;
+            assert.equal(actual,expected,"Admin access revoked. New account should no longer be Admin");
+        })
+    });
+
+
+
+
 })
