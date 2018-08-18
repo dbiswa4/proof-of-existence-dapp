@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardBody } from 'reactstrap';
 import getWeb3 from '../../utils/getWeb3';
+<<<<<<< HEAD
 import ProofOfExistanceContract from '../../../build/contracts/ProofOfExistence.json';
+=======
+import ProofOfExistanceContract from '../../../build/contracts/ProofOfExistance.json';
+>>>>>>> 8d6b3da8dea8109d551e6c5d63e7dcded0015ccc
 
 class Home extends Component {
 

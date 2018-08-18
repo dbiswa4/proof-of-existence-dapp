@@ -5,7 +5,11 @@ import BasicForm from '../../components/Forms/BasicForm/BasicForm';
 import DocumentDetailsCard from '../../components/Cards/DocumentDetailsCard/DocumentDetailsCard';
 import DocumentPreviewCard from '../../components/Cards/DocumentPreviewCard/DocumentPreviewCard';
 import WarningModal from '../../components/Modals/WarningModal';
+<<<<<<< HEAD
 import ProofOfOwnershipContract from '../../../build/contracts/ProofOfExistence.json';
+=======
+import ProofOfOwnershipContract from '../../../build/contracts/ProofOfExistance.json';
+>>>>>>> 8d6b3da8dea8109d551e6c5d63e7dcded0015ccc
 import getWeb3 from '../../utils/getWeb3';
 import ipfs from '../../ipfs/ipfs';
 
