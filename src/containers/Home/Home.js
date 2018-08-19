@@ -118,7 +118,7 @@ class Home extends Component {
                 return (
                     <Row>
                         <Col xs="12" sm="12" lg="12">
-                            <Card className="text-dark bg-light">
+                            <Card className="text-dark bg-white">
                                 <CardBody className="pb-0">
                                     <div className="tag">
                                         You have not uploaded any documents yet.
@@ -136,19 +136,17 @@ class Home extends Component {
                     <br />
                     <Row>
                         <Col>
-
-                        <p>Add another component here</p>
-
+                        <h3>Your document details in Proof Of Existence DApp:</h3>
                         </Col>
                         </Row>
 
                     <Row>
                         <Col>
-                            <Card>
+                            <Card className="bg-info">
                                 <CardBody>
                                     <div className="container-fluid p-5 activity">
                                         <div className="col text-center mb-2">
-                                            <h2 className="mb-4">Recent  Activity on Proof Of Existance Dapp</h2>
+                                            <h4 className="mb-3"><strong>Recent  Activities</strong></h4>
                                         </div>
                                         <div id="activity_stream" style={stylr}>
                                             <div className="mb-4 col offset-lg-1 col-lg-10">

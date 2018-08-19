@@ -38,7 +38,7 @@ class DefaultLayout extends Component {
     
     return (
       <div className="app">
-        <AppHeader fixed >
+        <AppHeader fixed  className="bg-primary text-white">
           <DefaultHeader address={this.state.address} />
         </AppHeader>
         <div className="app-body">

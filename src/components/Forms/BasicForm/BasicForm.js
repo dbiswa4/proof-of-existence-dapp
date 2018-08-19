@@ -15,16 +15,13 @@ const BasicForm = (props) => {
 
   return (
     <div className="animated fadeIn flex-row align-items-center">
-      <Card >
+      <Card className="bg-info">
         <br />
         <CardBody>
-          <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
+          <Form action="" method="post" encType="multipart/form-data" className="form-horizontal text-white">
             <FormGroup row>
-              <Col md="3">
-                <Label>Type</Label>
-              </Col>
               <Col xs="12" md="9">
-                <p className="form-control-static">Enter the detail in below section.</p>
+                <h5 className="form-control-static text-white"><strong>Please provide details in below section:</strong></h5>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -32,8 +29,8 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputName2" >First Name</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName2" placeholder="John" name="firstname" onChange={(event) => props.handleChange(event)} required />
-                <FormText className="help-block">Please enter your name</FormText>
+                <Input type="text" id="exampleInputName2" placeholder="Tony" name="firstname" onChange={(event) => props.handleChange(event)} required />
+                <FormText className="help-block">Please enter your first name</FormText>
               </Col>
             </FormGroup>
 
@@ -42,8 +39,8 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputName3" >Last Name</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName3" placeholder="Doe" name="lastname" onChange={(event) => props.handleChange(event)} required />
-                <FormText className="help-block">Please enter your name</FormText>
+                <Input type="text" id="exampleInputName3" placeholder="Stark" name="lastname" onChange={(event) => props.handleChange(event)} required />
+                <FormText className="help-block">Please enter your last name</FormText>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -51,7 +48,7 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputEmail2" >Email</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="email" id="exampleInputEmail2" placeholder="name@example.com" name="email" onChange={(event) => props.handleChange(event)} required />
+                <Input type="email" id="exampleInputEmail2" placeholder="ironman@marvels.com" name="email" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your email</FormText>
               </Col>
             </FormGroup>
@@ -73,7 +70,7 @@ const BasicForm = (props) => {
             </FormGroup>
           </Form>
             <Button type="reset" size="sm" color="warning"><i className="fa fa-ban"></i> Reset</Button>&nbsp; &nbsp;
-          <Button type="submit" size="sm" color="info" onClick={props.handleSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>
+          <Button type="submit" size="sm" color="success" onClick={props.handleSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>
         </CardBody>
       </Card>
     </div>

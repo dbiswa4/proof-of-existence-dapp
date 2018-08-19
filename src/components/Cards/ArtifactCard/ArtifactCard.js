@@ -6,7 +6,7 @@ const artifactCard = (props) => {
     return (
         <div className="animated fadeIn flex-row align-items-center">
             <div className="animated fadeIn">
-                <Card>
+                <Card className="bg-info">
                     <CardBody>
                         <Row>
                             <Col xs="12" md="3" xl="3">
