@@ -9,7 +9,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
 
     // Checking if MetaMask has been installed/Enaables in the browser  
      if (!window.web3) {
-       window.alert('Please install MetaMask to start using the Dapp.');
+       window.alert('MetaMask not installed. Please install it to start using the Dapp.');
        //console.log(" getWeb3 this: ", this)
        return;
      }
@@ -38,7 +38,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
     }
 
      if (!web3.eth.coinbase) {
-       window.alert('Please activate MetaMask to start entering the Dapp.');
+       window.alert('MetaMask is not activated. Please activate it to enter the Dapp.');
        return;
      }
     //console.log("getWeb3: this : ", this)

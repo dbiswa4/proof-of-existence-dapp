@@ -136,9 +136,7 @@ class Home extends Component {
                     <br />
                     <Row>
                         <Col>
-
-                        <p>Add another component here</p>
-
+                        <h3>Your document details in Proof Of Existence DApp:</h3>
                         </Col>
                         </Row>
 
@@ -148,7 +146,7 @@ class Home extends Component {
                                 <CardBody>
                                     <div className="container-fluid p-5 activity">
                                         <div className="col text-center mb-2">
-                                            <h2 className="mb-4">Recent  Activity on Proof Of Existance Dapp</h2>
+                                            <h4 className="mb-3">Recent  Activities</h4>
                                         </div>
                                         <div id="activity_stream" style={stylr}>
                                             <div className="mb-4 col offset-lg-1 col-lg-10">

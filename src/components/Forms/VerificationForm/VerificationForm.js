@@ -19,7 +19,7 @@ const VerificationForm = (props) => {
           <Form id="document-verification-form" action="" method="post" encType="multipart/form-data" className="form-horizontal">
             <FormGroup row>
               <Col xs="12" md="9">
-                <p className="form-control-static">Upload the document you want to verify:</p>
+                <h5 className="form-control-static">Upload the document you want to verify:</h5>
               </Col>
             </FormGroup>
             <FormGroup row>

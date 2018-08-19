@@ -21,7 +21,7 @@ const BasicForm = (props) => {
           <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
             <FormGroup row>
               <Col xs="12" md="9">
-                <p className="form-control-static">Please provide details in below section:</p>
+                <h5 className="form-control-static">Please provide details in below section:</h5>
               </Col>
             </FormGroup>
             <FormGroup row>
