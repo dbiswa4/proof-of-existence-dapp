@@ -15,13 +15,13 @@ const BasicForm = (props) => {
 
   return (
     <div className="animated fadeIn flex-row align-items-center">
-      <Card >
+      <Card className="bg-info">
         <br />
         <CardBody>
-          <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
+          <Form action="" method="post" encType="multipart/form-data" className="form-horizontal text-white">
             <FormGroup row>
               <Col xs="12" md="9">
-                <h5 className="form-control-static">Please provide details in below section:</h5>
+                <h5 className="form-control-static text-white">Please provide details in below section:</h5>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -70,7 +70,7 @@ const BasicForm = (props) => {
             </FormGroup>
           </Form>
             <Button type="reset" size="sm" color="warning"><i className="fa fa-ban"></i> Reset</Button>&nbsp; &nbsp;
-          <Button type="submit" size="sm" color="info" onClick={props.handleSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>
+          <Button type="submit" size="sm" color="success" onClick={props.handleSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>
         </CardBody>
       </Card>
     </div>
