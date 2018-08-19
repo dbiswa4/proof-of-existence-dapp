@@ -12,7 +12,7 @@ const ImagePreviewCard = (props) => {
     return (
         <div className="animated fadeIn flex-row align-items-center">
             <div className="animated fadeIn">
-                <Card>
+                <Card className="bg-info">
                     {/* <CardHeader>
                         <i className="fa fa-align-justify"></i><strong>Document Preview</strong>
                     </CardHeader> */}

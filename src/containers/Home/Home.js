@@ -118,7 +118,7 @@ class Home extends Component {
                 return (
                     <Row>
                         <Col xs="12" sm="12" lg="12">
-                            <Card className="text-dark bg-light">
+                            <Card className="text-dark bg-white">
                                 <CardBody className="pb-0">
                                     <div className="tag">
                                         You have not uploaded any documents yet.
@@ -142,11 +142,11 @@ class Home extends Component {
 
                     <Row>
                         <Col>
-                            <Card>
+                            <Card className="bg-info">
                                 <CardBody>
                                     <div className="container-fluid p-5 activity">
                                         <div className="col text-center mb-2">
-                                            <h4 className="mb-3">Recent  Activities</h4>
+                                            <h4 className="mb-3"><strong>Recent  Activities</strong></h4>
                                         </div>
                                         <div id="activity_stream" style={stylr}>
                                             <div className="mb-4 col offset-lg-1 col-lg-10">
