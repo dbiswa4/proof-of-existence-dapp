@@ -4,13 +4,41 @@ import "./Mortal.sol";
 
 contract ProofOfExistence is Mortal{
 
+    mapping(address => bool) admins;
+    mapping( string => Document) documents;
+    mapping(address => UserUsageCount) usersUsage;
     uint documentUploadPeriod = 120 seconds;
     uint documentLimit = 3;
+    bool private stopped = false;
     
     //Document upload actions. To be used for user throtling
     enum UploadChoices { UPLOAD_CNT_INCR, UPLOAD_CNT_RESET, UPLOAD_NO }
     UploadChoices uploadChoice;
     UploadChoices constant defaultUploadChoice = UploadChoices.UPLOAD_NO;
+
+    //Document idenfiers alongwith ipfs has of the document
+    struct Document {
+        bytes32 docHash;
+        uint docTimestamp;
+        string ipfsHash;
+    }
+
+    //To keep track of all the documents owned by a user
+    struct User {
+        address addr;
+        string userName;
+        bytes32[] documentList;
+        mapping(bytes32 => Document) documentDetails;
+        //uint lastUploadTimestamp;
+    }
+
+    mapping (address => User) users;
+
+    //Maintain user usage count to implement throtlling
+    struct UserUsageCount {
+        uint uploadTime;
+        uint count;
+    }
 
 
     //Events for logging
