@@ -18,16 +18,13 @@ const VerificationForm = (props) => {
         <CardBody>
           <Form id="document-verification-form" action="" method="post" encType="multipart/form-data" className="form-horizontal">
             <FormGroup row>
-              <Col md="3">
-                <Label>Type</Label>
-              </Col>
               <Col xs="12" md="9">
-                <p className="form-control-static">Upload the document.</p>
+                <p className="form-control-static">Upload the document you want to verify:</p>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Col md="3">
-                <Label htmlFor="fileInput">File input</Label>
+                <Label htmlFor="fileInput">Input</Label>
               </Col>
               <Col xs="12" md="9">
                 <Input type="file" id="fileInput" name="fileInput" onChange={(e) => props.handleImageChange(e)} />
