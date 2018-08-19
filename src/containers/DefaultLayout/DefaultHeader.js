@@ -27,14 +27,14 @@ class DefaultHeader extends Component {
     return (
       <React.Fragment>
         <Nav stype={style} className="d-md-down-none" navbar>
-          <NavItem className="px-3">
+          <NavItem className="px-4">
             <NavLink href="/">Home</NavLink>
           </NavItem>
-          <NavItem className="px-3">
+          <NavItem className="px-4">
             <NavLink href="upload">Upload</NavLink>
           </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="verify">Verify Document</NavLink>
+          <NavItem className="px-4">
+            <NavLink href="verify">Verify</NavLink>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>

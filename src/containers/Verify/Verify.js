@@ -188,7 +188,7 @@ class Verify extends Component {
             );
         } else {
             if (this.state.contractResponse.isPresent === false) {
-                console.log("Document does not exist in blockchain")
+                console.log("Document doesnt exist in Blockchain")
                 console.log(this.state);
                 console.log("blockchainDigest=" + this.state.blockchainDigest);
                 console.log("imagePreviewUrl=" + this.state.imagePreviewUrl);
@@ -196,7 +196,7 @@ class Verify extends Component {
                     <WarningModal
                         warning={this.state.warning}
                         toggleWarning={this.toggleWarning}
-                        message="The document doesnot exist in blockchain"
+                        message="The document doesnt exist in blockchain"
                     />);
             }
         }
