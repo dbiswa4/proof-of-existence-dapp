@@ -60,6 +60,8 @@ class Upload extends Component {
         console.log("Clicked on Submit button ");
         console.log(this.state);
 
+        const powInstance = this.powInstance;
+
         ipfs.files.add(this.state.fileBuffer, (error, result) => {
             if (error) {
                 console.error(error);
@@ -71,18 +73,21 @@ class Upload extends Component {
             console.log('ipfsHash: ', result[0].hash);
             console.log('account: ', this.state.account);
 
-            console.log("file has been uploaded to IPFS")
+            console.log("file has been uploaded to IPFS");
 
-            this.powInstance.uploadDocument(this.state.digest, this.state.name, result[0].hash, { from: this.state.account }).then((result)=>{
-                console.log("upload document result: " , result)
-               return  this.powInstance.fetchDocument.call(this.state.digest, { from: this.state.account })
-            }).then(result => {
+            powInstance.uploadDocument(this.state.digest, this.state.name, result[0].hash, { from: this.state.account });
+            //.then((result)=>{
+            //    console.log("upload document result: " , result)
+
+            /*
+             powInstance.fetchDocument.call(this.state.digest, { from: this.state.account }).then(result => {
                 this.setState({digest:result[0],timestamp:result[1].valueOf(),ipfsHash:result[2]})
                 console.log("fetch document: ", result);
             }).error((error)=>{
                 console.log("error: ", error);
                 window.alert(error);
             })
+            */
         });
     }
 
