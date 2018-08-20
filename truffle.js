@@ -1,5 +1,7 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
  
+//UserInput:
+//Please update mnemonic to be able to connect to Ropsten network.
 var mnemonic = "upper ...";
 
 module.exports = {
