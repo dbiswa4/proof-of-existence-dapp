@@ -163,28 +163,20 @@ class Upload extends Component {
         const publicAddress = this.state.web3.eth.coinbase.toLowerCase();
         console.log("--------public address----------")
         console.log(publicAddress);
-        console.log('state: ', this.state)
-
+        
         // Get accounts.
         this.state.web3.eth.getAccounts((error, accounts) => {
-
+            
             pow.deployed().then((instance) => {
                 this.powInstance = instance;
                 this.setState({ account: accounts[0] });
+                console.log('state: ', this)
             })
         })
     }
 
 
     render() {
-
-        const prefill = {
-            imageFileName: "ProfileImage.jpg",
-            name: "John Doe",
-            email: "name@example.com",
-            dateFormat: "dd/yy/mm",
-            textArea: "Enter text here"
-        }
 
         let { fileBuffer } = this.state;
         let $imagePreview = null;
@@ -231,7 +223,7 @@ class Upload extends Component {
                     <Row>
                         <Col xs="12" md="6" xl="6">
                             <BasicForm
-                                name={prefill.name}
+                                name={"user1"}
                                 handleSubmit={this.handleSubmit}
                                 handleChange={this.handleChange}
                                 handleImageChange={this.handleImageChange} />
