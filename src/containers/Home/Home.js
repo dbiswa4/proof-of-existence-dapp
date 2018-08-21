@@ -6,6 +6,7 @@ import ProofOfExistenceContract from '../../../build/contracts/ProofOfExistence.
 class Home extends Component {
 
     state = {
+        userName:'',
         docHashList: [],
         items: []
     }
@@ -49,20 +50,22 @@ class Home extends Component {
                 console.log("inside deployed method");
                 this.powInstance = instance;
                 this.setState({ account: accounts[0] });
-                return instance.fetchAllDocuments.call(accounts[0], { from: accounts[0] })
+                return instance.fetchAllDocumentsDetails.call(accounts[0], { from: accounts[0] })
             }).then((results) => {
                 // Update state with the result.
-                console.log("-------------final result--------------");
-                console.log(results);
-                this.setState({ docHashList: results })
-                results.map((x, index) => {
+                console.log("Documents details fetched");
+                console.log("User Name", results[0]);
+                console.log("Doc List", results[1]);
+                this.setState({userName : results[0]})
+                this.setState({ docHashList: results[1] })
+                results[1].map((x, index) => {
                     this.powInstance.fetchDocument.call(x, { from: accounts[0] })
                         .then((result) => {
                             let item = {
                                 docHash: result[0],
                                 docTimestamp: result[1],
                                 ipfsHash: result[2],
-                                userName: "userName"
+                                userName: this.state.userName
                             }
                             let itemsList = this.state.items;
                             itemsList.push(item);
@@ -95,16 +98,16 @@ class Home extends Component {
                             <Card className="text-dark bg-light">
                                 <CardBody className="pb-0">
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>User Name:</strong> {item.userName}</div>
+                                        <div className="tag token"><strong>User Name :</strong> {item.userName}</div>
                                     </Col>
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>Doc Timestamp:</strong> {"docTimestamp"}</div>
+                                        <div className="tag token"><strong>Doc Timestamp :</strong> {item.docTimestamp.toNumber()}</div>
                                     </Col>
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>Doc Hash:</strong> {item.docHash}</div>
+                                        <div className="tag token"><strong>Doc Hash :</strong> {item.docHash}</div>
                                     </Col>
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>ipfs Hash:</strong> {item.ipfsHash}</div>
+                                        <div className="tag token"><strong>IPFS Hash :</strong> {item.ipfsHash}</div>
                                     </Col>
                                 </CardBody>
                             </Card>
@@ -146,7 +149,7 @@ class Home extends Component {
                                 <CardBody>
                                     <div className="container-fluid p-5 activity">
                                         <div className="col text-center mb-2">
-                                            <h4 className="mb-3"><strong>Recent  Activities</strong></h4>
+                                            <h4 className="mb-3"><strong></strong>Recent  Activities</h4>
                                         </div>
                                         <div id="activity_stream" style={stylr}>
                                             <div className="mb-4 col offset-lg-1 col-lg-10">

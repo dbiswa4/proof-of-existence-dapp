@@ -13,7 +13,8 @@ class Verify extends Component {
     state = {
         storageValue: 0,
         web3: null,
-        name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         dateInput: '',
         textAreaInput: '',

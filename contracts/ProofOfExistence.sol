@@ -42,7 +42,7 @@ contract ProofOfExistence is Mortal{
 
 
     //Events for logging
-    event LogUploadDocument(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
+    event LogDocumentRequest(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
     event LogAssignAdmin(address _sender, string _message);
 
     //Modifiers
@@ -110,16 +110,16 @@ contract ProofOfExistence is Mortal{
             usersUsage[msg.sender].uploadTime = now;
             usersUsage[msg.sender].count = 1;
             //Log document upload event
-            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
+            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
                                                     //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         } else if (choice == UploadChoices.UPLOAD_CNT_INCR) {
             updateOnChainData(_docHash,_userName,_ipfsHash);
             usersUsage[msg.sender].count += 1;
             //Log document upload event
-            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success");
+            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success");
 
         } else if (choice == UploadChoices.UPLOAD_NO){
-            emit LogUploadDocument(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Not Success - throtling limit exceeded");
+            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Not Success - throtling limit exceeded");
         } else {
             return false;
         }
@@ -180,13 +180,22 @@ contract ProofOfExistence is Mortal{
         require(_docHash != 0, "Document Hash is mandatory");
         
         Document storage document = users[msg.sender].documentDetails[_docHash];
-        emit LogUploadDocument(msg.sender,users[msg.sender].userName,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
+        emit LogDocumentRequest(msg.sender,users[msg.sender].userName,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
                                                 //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         return(document.docHash,document.docTimestamp,document.ipfsHash);
     }
 
     //To fetch all the documents for a user
-    function fetchAllDocuments() public view returns(bytes32[]){
+    function fetchAllDocuments() public 
+    view 
+    returns(bytes32[]){
         return users[msg.sender].documentList;
+    }
+
+    //Returns Document hash and user name
+    function fetchAllDocumentsDetails() public 
+    view 
+    returns(string, bytes32[]){
+        return(users[msg.sender].userName, users[msg.sender].documentList);
     }
 }
