@@ -51,7 +51,9 @@
   "dependencies": {
     "@coreui/coreui": "^2.0.4",
     "@coreui/react": "^2.0.5",
+    "datetime": "0.0.3",
     "dotenv": "^2.0.0",
+    "help": "^3.0.2",
     "install": "^0.12.1",
     "ipfs-api": "24.0.0",
     "node-forge": "^0.7.5",
