@@ -14,7 +14,8 @@ class Upload extends Component {
     state = {
         storageValue: 0,
         web3: null,
-        name: '',
+        firstname: '',
+        lastame: '',
         email: '',
         dateInput: '',
         textAreaInput: '',
@@ -69,13 +70,14 @@ class Upload extends Component {
             }
             this.setState({ ipfsHash: result[0].hash })
             console.log('digest: ', this.state.digest);
-            console.log('name: :', this.state.firstname);
+            console.log('First Name: :', this.state.firstname);
+            console.log('Last Name: :', this.state.lastName);
             console.log('ipfsHash: ', result[0].hash);
             console.log('account: ', this.state.account);
 
-            console.log("file has been uploaded to IPFS");
+            console.log("File has been uploaded to IPFS");
 
-            powInstance.uploadDocument(this.state.digest, this.state.name, result[0].hash, { from: this.state.account });
+            powInstance.uploadDocument(this.state.digest, this.state.lastname + ", " + this.state.firstname, result[0].hash, { from: this.state.account });
             //.then((result)=>{
             //    console.log("upload document result: " , result)
 
@@ -196,7 +198,7 @@ class Upload extends Component {
                     <ImagePreviewCard fileBuffer={this.state.imagePreview} />
                     <ArtifactCard
                         fileInput={this.state.fileInput}
-                        name={this.state.firstname}
+                        name={this.state.lastname + ", " + this.state.firstname}
                         email={this.state.email}
                         timestamp={this.state.dateInput}
                         docHash={this.state.digest}
