@@ -50,22 +50,20 @@ class Home extends Component {
                 console.log("inside deployed method");
                 this.powInstance = instance;
                 this.setState({ account: accounts[0] });
-                return instance.fetchAllDocumentsDetails.call(accounts[0], { from: accounts[0] })
+                return instance.fetchAllDocuments.call(accounts[0], { from: accounts[0] })
             }).then((results) => {
                 // Update state with the result.
                 console.log("Documents details fetched");
-                console.log("User Name", results[0]);
-                console.log("Doc List", results[1]);
-                this.setState({userName : results[0]})
-                this.setState({ docHashList: results[1] })
-                results[1].map((x, index) => {
+                console.log("Results : ", results);
+                this.setState({ docHashList: results })
+                results.map((x, index) => {
                     this.powInstance.fetchDocument.call(x, { from: accounts[0] })
                         .then((result) => {
                             let item = {
                                 docHash: result[0],
-                                docTimestamp: result[1],
-                                ipfsHash: result[2],
-                                userName: this.state.userName
+                                docTags: result[1],
+                                docTimestamp: result[2],
+                                ipfsHash: result[3]
                             }
                             let itemsList = this.state.items;
                             itemsList.push(item);
@@ -98,7 +96,7 @@ class Home extends Component {
                             <Card className="text-dark bg-light">
                                 <CardBody className="pb-0">
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>User Name :</strong> {item.userName}</div>
+                                        <div className="tag token"><strong>Doc Tags :</strong> {item.docTags}</div>
                                     </Col>
                                     <Col xs="12" md="12">
                                         <div className="tag token"><strong>Doc Timestamp :</strong> {item.docTimestamp.toNumber()}</div>
