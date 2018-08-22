@@ -1,14 +1,19 @@
 pragma solidity ^0.4.18;
 
 import "./Mortal.sol";
+import "./Utils.sol";
 
 contract ProofOfExistence is Mortal{
+
+    //Import all the functions from library contract
+    //using Utils for *; 
 
     mapping(address => bool) admins;
     mapping( string => Document) documents;
     mapping(address => UserUsageCount) usersUsage;
     uint documentUploadPeriod = 120 seconds;
     uint documentLimit = 3;
+    uint private constant docTagsMaxLen = 82;
     bool private stopped = false;
     
     //Document upload actions. To be used for user throtling
@@ -97,11 +102,28 @@ contract ProofOfExistence is Mortal{
         return false;
     }
 
+    function isStringAcceptable(string _str) 
+    public
+    pure
+    returns(bool) {
+        if (Utils.utfStringLength(_str) <= docTagsMaxLen) {
+            return true;
+        }
+        return false;
+    }
+
     //Upload document hash to Blockchain
     function uploadDocument(bytes32 _docHash,string _docTags,string _ipfsHash) 
     public
     stopInEmergency 
     returns(bool) {
+
+        //Verify the string field (docTags) passed.
+        //This is a safeguard to stop someone storing huge ammount of data into Blockchain
+        if(!isStringAcceptable(_docTags)) {
+            return false;
+        }
+
         //UserUsageCount storage userUploadStats = usersUsage[msg.sender];
         UploadChoices choice = verifyRateLimit(msg.sender);
 

@@ -105,7 +105,7 @@ class Home extends Component {
                                         <div className="tag token"><strong>Doc Hash :</strong> {item.docHash}</div>
                                     </Col>
                                     <Col xs="12" md="12">
-                                        <div className="tag token"><strong>IPFS Hash :</strong> {item.ipfsHash}</div>
+                                        <div className="tag token"><strong>IPFS Hash :</strong> <a href={'https://ipfs.infura.io/ipfs/' + item.ipfsHash}>{'https://ipfs.infura.io/ipfs/' + item.ipfsHash}</a></div>
                                     </Col>
                                 </CardBody>
                             </Card>
