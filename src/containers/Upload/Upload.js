@@ -198,7 +198,7 @@ class Upload extends Component {
                     <ImagePreviewCard fileBuffer={this.state.imagePreview} />
                     <ArtifactCard
                         fileInput={this.state.fileInput}
-                        name={this.state.lastname + ", " + this.state.firstname}
+                        name={this.state.firstname + " " + this.state.lastname}
                         email={this.state.email}
                         timestamp={this.state.dateInput}
                         docHash={this.state.digest}

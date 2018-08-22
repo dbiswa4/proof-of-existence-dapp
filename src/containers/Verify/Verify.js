@@ -145,10 +145,10 @@ class Verify extends Component {
 
                 if (result[0] != 0x0) {
                     console.log("result state set")
-                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[1].valueOf(), ipfsHash: result[2], name: "userName",email:"abc@abc.com", isPresent: true }, warning: true });
+                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2].valueOf(), ipfsHash: result[3], name: "userName",email:"abc@abc.com", isPresent: true }, warning: true });
                 } else {
                     console.log("result2 = empty")
-                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[1], ipfsHash: result[2], name: "userName",email:"abc@abc.com", isPresent: false }, warning: true })
+                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2], ipfsHash: result[3], name: "userName",email:"abc@abc.com", isPresent: false }, warning: true })
                 }
             }).catch(error => {
                 console.log("----------error---------")

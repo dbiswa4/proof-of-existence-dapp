@@ -19,6 +19,7 @@ contract ProofOfExistence is Mortal{
     //Document idenfiers alongwith ipfs has of the document
     struct Document {
         bytes32 docHash;
+        string docTags;
         uint docTimestamp;
         string ipfsHash;
     }
@@ -26,7 +27,6 @@ contract ProofOfExistence is Mortal{
     //To keep track of all the documents owned by a user
     struct User {
         address addr;
-        string userName;
         bytes32[] documentList;
         mapping(bytes32 => Document) documentDetails;
         //uint lastUploadTimestamp;
@@ -42,7 +42,7 @@ contract ProofOfExistence is Mortal{
 
 
     //Events for logging
-    event LogDocumentRequest(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
+    event LogDocumentRequest(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
     event LogAssignAdmin(address _sender, string _message);
 
     //Modifiers
@@ -98,7 +98,7 @@ contract ProofOfExistence is Mortal{
     }
 
     //Upload document hash to Blockchain
-    function uploadDocument(bytes32 _docHash,string _userName,string _ipfsHash) 
+    function uploadDocument(bytes32 _docHash,string _docTags,string _ipfsHash) 
     public
     stopInEmergency 
     returns(bool) {
@@ -106,27 +106,27 @@ contract ProofOfExistence is Mortal{
         UploadChoices choice = verifyRateLimit(msg.sender);
 
         if (choice == UploadChoices.UPLOAD_CNT_RESET) {
-            updateOnChainData(_docHash,_userName,_ipfsHash);
+            updateOnChainData(_docHash,_docTags,_ipfsHash);
             usersUsage[msg.sender].uploadTime = now;
             usersUsage[msg.sender].count = 1;
             //Log document upload event
-            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
-                                                    //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
+            emit LogDocumentRequest(msg.sender, _docTags,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
+                                                    //(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         } else if (choice == UploadChoices.UPLOAD_CNT_INCR) {
-            updateOnChainData(_docHash,_userName,_ipfsHash);
+            updateOnChainData(_docHash,_docTags,_ipfsHash);
             usersUsage[msg.sender].count += 1;
             //Log document upload event
-            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Success");
+            emit LogDocumentRequest(msg.sender, _docTags,_docHash, block.timestamp, _ipfsHash, "Upload Success");
 
         } else if (choice == UploadChoices.UPLOAD_NO){
-            emit LogDocumentRequest(msg.sender, _userName,_docHash, block.timestamp, _ipfsHash, "Upload Not Success - throtling limit exceeded");
+            emit LogDocumentRequest(msg.sender, _docTags,_docHash, block.timestamp, _ipfsHash, "Upload Not Success - throtling limit exceeded");
         } else {
             return false;
         }
         return true;
     }
 
-    function updateOnChainData(bytes32 _docHash,string _userName,string _ipfsHash) 
+    function updateOnChainData(bytes32 _docHash,string _docTags,string _ipfsHash) 
     private
     returns(bool) {
         //check whether the document already exists in the blockchain
@@ -137,9 +137,8 @@ contract ProofOfExistence is Mortal{
 
         if(users[msg.sender].documentDetails[_docHash].docHash == 0){
             users[msg.sender].addr = msg.sender;
-            users[msg.sender].userName = _userName;
             users[msg.sender].documentList.push(_docHash);
-            users[msg.sender].documentDetails[_docHash] = Document(_docHash,block.timestamp,_ipfsHash);
+            users[msg.sender].documentDetails[_docHash] = Document(_docHash, _docTags, block.timestamp, _ipfsHash);
             //users[msg.sender].lastUploadTimestamp = block.timestamp;
         }else {
             return false;
@@ -176,13 +175,13 @@ contract ProofOfExistence is Mortal{
     //Fetch documents
     function fetchDocument(bytes32 _docHash) 
     public 
-    returns(bytes32, uint, string){
+    returns(bytes32, string, uint, string){
         require(_docHash != 0, "Document Hash is mandatory");
         
         Document storage document = users[msg.sender].documentDetails[_docHash];
-        emit LogDocumentRequest(msg.sender,users[msg.sender].userName,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
-                                                //(address _addr,string _userName, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
-        return(document.docHash,document.docTimestamp,document.ipfsHash);
+        emit LogDocumentRequest(msg.sender,document.docTags,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
+                                                //(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
+        return(document.docHash, document.docTags, document.docTimestamp, document.ipfsHash);
     }
 
     //To fetch all the documents for a user
@@ -195,7 +194,7 @@ contract ProofOfExistence is Mortal{
     //Returns Document hash and user name
     function fetchAllDocumentsDetails() public 
     view 
-    returns(string, bytes32[]){
-        return(users[msg.sender].userName, users[msg.sender].documentList);
+    returns(bytes32[]){
+        return(users[msg.sender].documentList);
     }
 }

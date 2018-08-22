@@ -26,20 +26,20 @@ const BasicForm = (props) => {
             </FormGroup>
             <FormGroup row>
               <Col md="3">
-                <Label htmlFor="exampleInputName2" >First Name</Label>
+                <Label htmlFor="exampleInputName2" >Doc Title</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName2" placeholder="Tony" name="firstname" onChange={(event) => props.handleChange(event)} required />
+                <Input type="text" id="exampleInputName2" placeholder="iron-suit" name="firstname" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your first name</FormText>
               </Col>
             </FormGroup>
 
             <FormGroup row>
               <Col md="3">
-                <Label htmlFor="exampleInputName3" >Last Name</Label>
+                <Label htmlFor="exampleInputName3" >Doc Tags</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName3" placeholder="Stark" name="lastname" onChange={(event) => props.handleChange(event)} required />
+                <Input type="text" id="exampleInputName3" placeholder="superhero" name="lastname" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your last name</FormText>
               </Col>
             </FormGroup>
