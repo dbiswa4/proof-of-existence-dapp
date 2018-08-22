@@ -10,7 +10,7 @@ const artifactCard = (props) => {
                     <CardBody>
                         <Row>
                             <Col xs="12" md="3" xl="3">
-                                <Label htmlFor="textarea-input">Owner</Label>
+                                <Label htmlFor="textarea-input">Tags</Label>
                             </Col>
                             <Col xs="12" md="6" xl="6">
                                 <Label>{props.name}</Label>
@@ -42,7 +42,7 @@ const artifactCard = (props) => {
                         </Row>
                         <Row>
                             <Col xs="12" md="3" xl="3">
-                                <Label htmlFor="textarea-input">ipfs Hash</Label>
+                                <Label htmlFor="textarea-input">IPFS Hash</Label>
                             </Col>
                             <Col xs="12" md="6" xl="6">
                                 <Label>{props.ipfsHash}</Label>
