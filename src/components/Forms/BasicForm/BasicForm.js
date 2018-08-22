@@ -29,7 +29,7 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputName2" >Doc Title</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName2" placeholder="iron-suit" name="firstname" onChange={(event) => props.handleChange(event)} required />
+                <Input type="text" maxLength={30}  id="exampleInputName2" placeholder="iron-suit" name="firstname" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your first name</FormText>
               </Col>
             </FormGroup>
@@ -39,7 +39,7 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputName3" >Doc Tags</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="text" id="exampleInputName3" placeholder="superhero" name="lastname" onChange={(event) => props.handleChange(event)} required />
+                <Input type="text" maxLength={30} id="exampleInputName3" placeholder="superhero" name="lastname" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your last name</FormText>
               </Col>
             </FormGroup>
@@ -48,7 +48,7 @@ const BasicForm = (props) => {
                 <Label htmlFor="exampleInputEmail2" >Email</Label>
               </Col>
               <Col xs="12" md="9">
-                <Input type="email" id="exampleInputEmail2" placeholder="ironman@marvels.com" name="email" onChange={(event) => props.handleChange(event)} required />
+                <Input type="email" maxLength={40} id="exampleInputEmail2" placeholder="ironman@marvels.com" name="email" onChange={(event) => props.handleChange(event)} required />
                 <FormText className="help-block">Please enter your email</FormText>
               </Col>
             </FormGroup>
