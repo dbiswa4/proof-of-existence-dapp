@@ -2,19 +2,22 @@
 
 ## Overview
 This application allows users to prove existence of some information by showing a time stamped picture/video.
+
 Once user logs into the DApp, th user can upload some data (pictures/video) and associated properties.
+
 Users can retrieve necessary reference data about their uploaded items to allow other people to verify the data authenticity.
 
 Data uploaded is stored in **IPFS**. The Hash of the document is stored **on chain**.
 
 ## Pre-requisites
-You need following tools: <br />
-* nodejs 8.11.3 <br />
-* npm 6.1.0 <br />
-* git (https://github.com/) <br />
-* MetaMask <br />
-* Truffle 4.1.13 <br />
-* ganache-cli <br />
+You need following tools:
+
+* nodejs 8.11.3
+* npm 6.1.0
+* git (https://github.com/)
+* MetaMask
+* Truffle 4.1.13
+* ganache-cli
 * Solidity 0.4.24 (solc-js)
 
 ## Environment Setup
