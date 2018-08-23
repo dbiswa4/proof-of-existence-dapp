@@ -10,11 +10,16 @@ Data uploaded is stored in **IPFS**. The Hash of the document is stored **on cha
 <br />
 ## Prerequisite
 You need following tools <br />
-* [git] (https://github.com/) <br />
+* nodejs 8.11.3 <br />
+* npm 6.1.0 <br />
+* git (https://github.com/) <br />
 * MetaMask <br />
-* Truffle <br />
-* ganache <br />
-* npm <br />
+* Truffle 4.1.13 <br />
+* ganache-cli <br />
+* Solidity 0.4.24 (solc-js)
+
+## Environment Setup
+
 
 ## Project Setup
 
@@ -47,5 +52,34 @@ _**Do either Step 7 or Step 8**_ <br />
 
 
 <ToDo>
+## Project Specifications
+* Success run of the app on a dev server locally
+* Able to visit URL and interact with the app
+* App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state
+
+* Test cases for all the contracts with explanation
+* Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct)
+* Tests provide adequate coverage for the contracts
+* All tests pass
+
+* Circuit breaker or Emergency stop feature included
+* Design Patterns used
+    * Mortal
+    * Restricted Access using Admins
+    * Rate Limiting
+
+* Measures taken to ensure that their contracts are not susceptible to common attacks
+    * 
+
+* Library - project contracts includes an import from a library
+* Smart Contract codes commented according to the specs in the documentation https://solidity.readthedocs.io/en/v0.4.21/layout-of-source-files.html#comments
+
+* Project uses **IPFS**
+* Testnet Deployment
+    * Ropsten
 
 ## Future Developments
+* **Implementing Upgradable Design Pattern**
+* **Admin/Authrization Page in the App**
+* **ENS integration**
+
