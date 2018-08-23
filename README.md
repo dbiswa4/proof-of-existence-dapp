@@ -22,7 +22,10 @@ You need following tools: <br />
 
 ## Project Setup
 1. Clone the repository <br />
-```git clone https://github.com/dbiswa4/proof-of-existence-dapp.git```
+```
+cd ~
+git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
+```
 
 2. Go to the project folder <br />
 ```cd proof-of-existence-dapp```
@@ -42,11 +45,17 @@ ganache-cli -a
 7. Migrate Contracts to local Blockchain <br />
 ```truffle migrate```
 
-8. Migrate Contracts to TestNet (Ropsten) <br />
-```truffle migrate --network ropsten```
-
 9. Log in to MetaMask <br />
 
+## Launch and Interact with the DApp
+1. Log in to **Metamask** in your favourite browser
+2. Connect to Local Netwrok in Metamask
+3. Go to the folder where you set up the app
+```cd ~/proof-of-existence-dapp```
+4. Start the app
+```npm run start```
+
+## Testnet deployment
 
 ## Project Specifications
 * Success run of the app on a dev server locally <br />
