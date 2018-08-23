@@ -36,7 +36,7 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 4. Start a Blockchain locally <br />
 ganache-cli -a
 
-5. Compile Contracts <br />
+5. Compile Smart Contracts <br />
 ```truffle compile```
 
 6. Test contracts <br />
@@ -50,12 +50,22 @@ ganache-cli -a
 ## Launch and Interact with the DApp
 1. Log in to **Metamask** in your favourite browser
 2. Connect to Local Netwrok in Metamask
-3. Go to the folder where you set up the app
+3. Go to the folder where you set up the app <br />
 ```cd ~/proof-of-existence-dapp```
-4. Start the app
+4. Start the app <br />
 ```npm run start```
+5. Open the app
+```http://localhost:3000/home```
 
 ## Testnet deployment
+
+## App Functionalities Summary
+
+
+## Commons Issues
+1. Not logged in to MetaMask - Error Messaged pop up
+2. Blockchain is not started when running in local mode
+
 
 ## Project Specifications
 * Success run of the app on a dev server locally <br />
