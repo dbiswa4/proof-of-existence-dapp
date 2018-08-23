@@ -1,9 +1,9 @@
 # Proof Of Existence DApp
 
 ## Overview
-This application allows users to prove existence of some information by showing a time stamped picture/video. <br />
-Once user logs into the DApp, th user can upload some data (pictures/video) and associated properties. <br />
-Users can retrieve necessary reference data about their uploaded items to allow other people to verify the data authenticity. <br />
+This application allows users to prove existence of some information by showing a time stamped picture/video.
+Once user logs into the DApp, th user can upload some data (pictures/video) and associated properties.
+Users can retrieve necessary reference data about their uploaded items to allow other people to verify the data authenticity.
 
 Data uploaded is stored in **IPFS**. The Hash of the document is stored **on chain**.
 
@@ -34,22 +34,20 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 ```npm install```
 
 4. Start a Blockchain locally <br />
-ganache-cli -a
+```ganache-cli -a```
 
 5. Compile Smart Contracts <br />
 ```truffle compile```
 
-6. Test contracts <br />
+6. Run the tests <br />
 ```truffle test```
 
 7. Migrate Contracts to local Blockchain <br />
 ```truffle migrate```
 
-9. Log in to MetaMask <br />
-
 ## Launch and Interact with the DApp
 1. Log in to **Metamask** in your favourite browser
-2. Connect to Local Netwrok in Metamask
+2. Connect to Private Netwrok (```LocalHost 8545```) in Metamask
 3. Go to the folder where you set up the app <br />
 ```cd ~/proof-of-existence-dapp```
 4. Start the app <br />
