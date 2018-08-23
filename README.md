@@ -1,9 +1,7 @@
 # Proof Of Existence DApp
 
 ## Overview
-This application allows users to prove existence of some information by showing a time stamped picture/video.
-
-Once user logs into the DApp, th user can upload some data (pictures/video) and associated properties.
+This application allows users to prove existence of some information by showing a time stamped picture/video. Once user logs into the DApp, th user can upload some data (pictures/video) and associated properties.
 
 Users can retrieve necessary reference data about their uploaded items to allow other people to verify the data authenticity.
 
@@ -19,9 +17,6 @@ You need following tools:
 * Truffle 4.1.13
 * ganache-cli
 * Solidity 0.4.24 (solc-js)
-
-## Environment Setup
-
 
 ## Project Setup
 1. Clone the repository <br />
@@ -69,8 +64,8 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 
 
 ## Project Specifications
-* Success run of the app on a dev server locally <br />
-* Able to visit URL and interact with the app <br />
+* Success run of the app on a dev server locally.
+* Able to visit URL and interact with the app.
 * App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state <br />
 * Test cases for all the contracts with explanation <br />
 * Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct) <br />
@@ -93,8 +88,22 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 * Testnet Deployment <br />
     * Ropsten <br />
 
-## Future Developments
-* **Implementing Upgradable Design Pattern**
-* **Admin/Authrization Page in the App**
-* **ENS integration**
+## Technology Stack
 
+* [ReactJs](https://reactjs.org/docs/getting-started.html) - React Frontend Development 
+* [Solidity](https://solidity.readthedocs.io/en/latest/) - Smart Contract Language
+* [NodeJs](https://nodejs.org/en/) - JavaScript Runtime
+* [IPFS](https://reactjs.org/docs/getting-started.html) - Decentralised storage
+* [Metamask](https://metamask.io/) - Wallet service
+* [npm](https://www.npmjs.com/) - Node Package Manager
+* [coreui](https://coreui.io/v1/docs/getting-started/introduction/#reactjs) - UI Components
+
+
+## Future Developments
+* _Implementing Upgradable Design Pattern_
+* _Admin/Authrization Page in the App_
+* _ENS integration_
+* _Other app functionalities enhancements_
+
+## Author
+* **Dipankar Biswas** - *Proof of Existence DApp* - [dbiswa4](https://github.com/dbiswa4)
