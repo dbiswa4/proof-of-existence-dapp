@@ -10,11 +10,11 @@ Data uploaded is stored in **IPFS**. The Hash of the document is stored **on cha
 <br />
 ## Prerequisite
 You need following tools <br />
-* git
-* MetaMask
-* Truffle
-* ganache
-* npm
+* [git] (https://github.com/) <br />
+* MetaMask <br />
+* Truffle <br />
+* ganache <br />
+* npm <br />
 
 ## Project Setup
 
