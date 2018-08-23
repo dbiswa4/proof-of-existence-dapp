@@ -51,12 +51,11 @@ _**Do either Step 7 or Step 8**_ <br />
 9. Log in to MetaMask <br />
 
 
-<ToDo>
 ## Project Specifications
+<br />
 * Success run of the app on a dev server locally
 * Able to visit URL and interact with the app
 * App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state
-
 * Test cases for all the contracts with explanation
 * Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct)
 * Tests provide adequate coverage for the contracts
