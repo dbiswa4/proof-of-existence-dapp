@@ -8,8 +8,8 @@ Users can retrieve necessary reference data about their uploaded items to allow 
 Data uploaded is stored in **IPFS**. The Hash of the document is stored **on chain**.
 
 <br />
-## Prerequisite
-You need following tools <br />
+## Pre-requisite
+You need following tools: <br />
 * nodejs 8.11.3 <br />
 * npm 6.1.0 <br />
 * git (https://github.com/) <br />
