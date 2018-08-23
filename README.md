@@ -52,30 +52,29 @@ _**Do either Step 7 or Step 8**_ <br />
 
 
 ## Project Specifications
-<br />
-* Success run of the app on a dev server locally
-* Able to visit URL and interact with the app
-* App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state
-* Test cases for all the contracts with explanation
-* Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct)
-* Tests provide adequate coverage for the contracts
-* All tests pass
+* Success run of the app on a dev server locally <br />
+* Able to visit URL and interact with the app <br />
+* App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state <br />
+* Test cases for all the contracts with explanation <br />
+* Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct) <br />
+* Tests provide adequate coverage for the contracts <br />
+* All tests pass <br />
 
-* Circuit breaker or Emergency stop feature included
-* Design Patterns used
-    * Mortal
-    * Restricted Access using Admins
-    * Rate Limiting
+* Circuit breaker or Emergency stop feature included <br />
+* Design Patterns used <br />
+    * Mortal <br />
+    * Restricted Access using Admins <br />
+    * Rate Limiting <br />
 
-* Measures taken to ensure that their contracts are not susceptible to common attacks
+* Measures taken to ensure that their contracts are not susceptible to common attacks <br />
     * 
 
-* Library - project contracts includes an import from a library
-* Smart Contract codes commented according to the specs in the documentation https://solidity.readthedocs.io/en/v0.4.21/layout-of-source-files.html#comments
+* Library - project contracts includes an import from a library <br />
+* Smart Contract codes commented according to the specs in the documentation <br /> https://solidity.readthedocs.io/en/v0.4.21/layout-of-source-files.html#comments
 
-* Project uses **IPFS**
-* Testnet Deployment
-    * Ropsten
+* Project uses **IPFS** <br />
+* Testnet Deployment <br />
+    * Ropsten <br />
 
 ## Future Developments
 * **Implementing Upgradable Design Pattern**
