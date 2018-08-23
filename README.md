@@ -66,27 +66,27 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 ## Project Specifications
 * Success run of the app on a dev server locally.
 * Able to visit URL and interact with the app.
-* App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state <br />
-* Test cases for all the contracts with explanation <br />
-* Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct) <br />
-* Tests provide adequate coverage for the contracts <br />
-* All tests pass <br />
+* App displays the current account, Signs transactions using metamask, Reflects updates to to the contract state.
+* Test cases for all the contracts with explanation.
+* Tests are properly structured (i.e. sets up context, executes a call on  the function to be tested, and verifies the result is correct).
+* Tests provide adequate coverage for the contracts.
+* All tests passed.
 
-* Circuit breaker or Emergency stop feature included <br />
-* Design Patterns used <br />
-    * Mortal <br />
-    * Restricted Access using Admins <br />
-    * Rate Limiting <br />
+* Circuit breaker or Emergency stop feature included.
+* Design Patterns used.
+    * Mortal
+    * Restricted Access using Admins
+    * Rate Limiting
 
-* Measures taken to ensure that their contracts are not susceptible to common attacks <br />
+* Measures taken to ensure that their contracts are not susceptible to common attacks
     * 
 
-* Library - project contracts includes an import from a library <br />
+* Library - project contracts includes an import from a library
 * Smart Contract codes commented according to the specs in the documentation <br /> https://solidity.readthedocs.io/en/v0.4.21/layout-of-source-files.html#comments
 
-* Project uses **IPFS** <br />
-* Testnet Deployment <br />
-    * Ropsten <br />
+* Project uses **IPFS**
+* Testnet Deployment
+    * Ropsten
 
 ## Technology Stack
 
