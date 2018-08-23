@@ -8,7 +8,6 @@ Users can retrieve necessary reference data about their uploaded items to allow 
 Data uploaded is stored in **IPFS**. The Hash of the document is stored **on chain**.
 
 ## Pre-requisites
-
 You need following tools: <br />
 * nodejs 8.11.3 <br />
 * npm 6.1.0 <br />
@@ -22,7 +21,6 @@ You need following tools: <br />
 
 
 ## Project Setup
-
 1. Clone the repository <br />
 ```git clone https://github.com/dbiswa4/proof-of-existence-dapp.git```
 
@@ -41,7 +39,6 @@ ganache-cli -a
 6. Test contracts <br />
 ```truffle test```
 
-_**Do either Step 7 or Step 8**_ <br />
 7. Migrate Contracts to local Blockchain <br />
 ```truffle migrate```
 
