@@ -18,6 +18,8 @@ You need following tools:
 * ganache-cli
 * Solidity 0.4.24 (solc-js)
 
+_You can use the **version** mentioned or higher_
+
 ## Project Setup
 1. Clone the repository <br />
 ```
@@ -44,6 +46,7 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 ```truffle migrate```
 
 ## Launch and Interact with the DApp
+Once you finish all of the Project Setup steps, you can proceed with following steps.
 1. Log in to **Metamask** in your favourite browser
 2. Connect to Private Netwrok (```LocalHost 8545```) in Metamask
 3. Go to the folder where you set up the app <br />
@@ -53,12 +56,29 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 5. Open the app
 ```http://localhost:3000/home```
 
+## Verify IPFS Connectivity
+```
+curl -H "Origin: https://ipfs.infura.io" \
+-H "Access-Control-Request-Method: POST" \
+-H "Access-Control-Request-Headers: X-Requested-With" \
+--verbose \
+https://ipfs.infura.io:5001/api/v0/swarm/peers; echo	
+
+curl \
+-H "Origin: http://infurarocks.com" \
+-H "Access-Control-Request-Method: GET" \
+-H "Access-Control-Request-Headers: X-Requested-With" \
+-H "Cache-Control: no-cache" \
+--verbose https://ipfs.infura.io/api/v0/cat?arg=QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/readme
+```
+
 ## Testnet deployment
-1. Update 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file
+1. Update 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file <br />
+
 ```var mnemonic = "upper box...";
 ```
-2. Migrate your contracts to TestNet (Ropsten or Rinkeby)
-truffle migrate --network ropsten
+2. Migrate your contracts to TestNet (Ropsten or Rinkeby) <br />
+```truffle migrate --network ropsten```
 3. 
 
 ## App Functionalities Summary
