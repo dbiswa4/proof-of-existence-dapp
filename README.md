@@ -75,8 +75,8 @@ curl \
 ## Testnet deployment
 1. Update below variable with 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file <br />
 
-```var mnemonic = "upper box xxx xxx xxx"
-```
+```var mnemonic = "upper box xxx xxx xxx"```
+
 3. Change network selection in Metamask to Ropsten or Rinkeby. 
 4. Migrate your contracts to TestNet (Ropsten or Rinkeby) <br />
 ```truffle migrate --network ropsten```
