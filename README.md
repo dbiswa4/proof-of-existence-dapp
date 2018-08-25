@@ -73,13 +73,15 @@ curl \
 ```
 
 ## Testnet deployment
-1. Update 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file <br />
+1. Update below variable with 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file <br />
 
-```var mnemonic = "upper box..."
+```var mnemonic = "upper box xxx xxx xxx"
 ```
-2. Migrate your contracts to TestNet (Ropsten or Rinkeby) <br />
+3. Change network selection in Metamask to Ropsten or Rinkeby. 
+4. Migrate your contracts to TestNet (Ropsten or Rinkeby) <br />
 ```truffle migrate --network ropsten```
-3. 
+4. Run the app 
+```npm run start``` 
 
 ## App Functionalities Summary
 The app have 3 pages as of now:
