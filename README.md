@@ -12,7 +12,7 @@ You need following tools:
 
 * nodejs 8.11.3
 * npm 6.1.0
-* git (https://github.com/)
+* git
 * MetaMask
 * Truffle 4.1.13
 * ganache-cli
@@ -54,9 +54,21 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 ```http://localhost:3000/home```
 
 ## Testnet deployment
+1. Update 12 word mnemonic in ```truffle.js``` or ```truffle-config.js``` file
+```var mnemonic = "upper box...";
+```
+2. Migrate your contracts to TestNet (Ropsten or Rinkeby)
+truffle migrate --network ropsten
+3. 
 
 ## App Functionalities Summary
+The app have 3 pages as of now:
 
+_Home : Landing Page. Shows details of all the documents you have uploaded to Blockchain & IPFS using the app_
+_Upload : Upload the document to IPFS and document Hash to Blockchain_
+_Verify: Given a document it verifies the ownership by looing into existence of it in Blockchain_
+
+When you login first time, it shows all the documents you have used this app for in the Home page. It also displays the External account you are logged in with.
 
 ## Commons Issues
 1. Not logged in to MetaMask - Error Messaged pop up
@@ -79,7 +91,9 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
     * Rate Limiting
 
 * Measures taken to ensure that their contracts are not susceptible to common attacks
-    * 
+    * Data Length verified in fallback method
+    * Length of the string passed to the Contract is verified
+    * Kill and Withdrwal functions are protected by modifiers
 
 * Library - project contracts includes an import from a library
 * Smart Contract codes commented according to the specs in the documentation <br /> https://solidity.readthedocs.io/en/v0.4.21/layout-of-source-files.html#comments
@@ -90,11 +104,12 @@ git clone https://github.com/dbiswa4/proof-of-existence-dapp.git
 
 ## Technology Stack
 
-* [ReactJs](https://reactjs.org/docs/getting-started.html) - React Frontend Development 
+* [Ethereum](https://www.ethereum.org/) - Blockchain App Platform
 * [Solidity](https://solidity.readthedocs.io/en/latest/) - Smart Contract Language
-* [NodeJs](https://nodejs.org/en/) - JavaScript Runtime
 * [IPFS](https://reactjs.org/docs/getting-started.html) - Decentralised storage
 * [Metamask](https://metamask.io/) - Wallet service
+* [ReactJs](https://reactjs.org/docs/getting-started.html) - React Frontend Development 
+* [NodeJs](https://nodejs.org/en/) - JavaScript Runtime
 * [npm](https://www.npmjs.com/) - Node Package Manager
 * [coreui](https://coreui.io/v1/docs/getting-started/introduction/#reactjs) - UI Components
 
