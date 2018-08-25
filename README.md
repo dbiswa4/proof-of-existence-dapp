@@ -86,9 +86,9 @@ curl \
 ## App Functionalities Summary
 The app have 3 pages as of now:
 
-_Home : Landing Page. Shows details of all the documents you have uploaded to Blockchain & IPFS using the app_
-_Upload : Upload the document to IPFS and document Hash to Blockchain_
-_Verify: Given a document it verifies the ownership by looing into existence of it in Blockchain_
+_**Home** : Landing Page. Shows details of all the documents you have uploaded to Blockchain & IPFS using the app_
+_**Upload** : Upload the document to IPFS and document Hash to Blockchain_
+_**Verify**: Given a document it verifies the ownership by looing into existence of it in Blockchain_
 
 When you login first time, it shows all the documents you have used this app for in the Home page. It also displays the External account you are logged in with.
 
