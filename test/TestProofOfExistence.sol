@@ -15,6 +15,7 @@ event LogBal(address _sender, uint _bal);
   // Truffle will send the TestContract one Ether after deploying the contract.
   uint public initialBalance = 1 ether;
 
+//Check Balance with send()
 function testCheckBalance() public {
     ProofOfExistence proofOfExistence = ProofOfExistence(DeployedAddresses.ProofOfExistence());
     // perform an action which sends value to myContract, then assert.
@@ -27,6 +28,7 @@ function testCheckBalance() public {
     Assert.equal(bal, expectedBal, "Expected balance is 0.5 ether");
   }
 
+  //Check Balance with transfer()
   function testCheckBalanceTransfer() public {
     ProofOfExistence proofOfExistence = ProofOfExistence(DeployedAddresses.ProofOfExistence());
     // perform an action which sends value to myContract, then assert.
@@ -38,6 +40,7 @@ function testCheckBalance() public {
     Assert.equal(bal, expectedBal, "Expected balance after subsequent transfer is 1 ether");
   }
 
+  //Test fallback method. It should be able to accept ether
   function testFallback() public {
     ProofOfExistence proofOfExistence = ProofOfExistence(DeployedAddresses.ProofOfExistence());
 

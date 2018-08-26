@@ -2,7 +2,7 @@ var Mortal = artifacts.require('Mortal.sol');
 
 contract('Tests for Mortal Contract',function(accounts){
 
-    //Test1
+    //Test - Owner should be the account which deploye the contract
     it('Test owner access',function(){
         return Mortal.deployed().then( function(instance){
             return instance.owner.call({from:accounts[0]});
@@ -13,7 +13,7 @@ contract('Tests for Mortal Contract',function(accounts){
         })  
     });
 
-    //Test2
+    //Negative test of previous test case
     it('Contract owner : negative condition',function(){
         return Mortal.deployed().then( instance => {
             return instance.owner.call({from:accounts[1]});
@@ -24,7 +24,7 @@ contract('Tests for Mortal Contract',function(accounts){
         })
     });
 
-    //Test3
+    //No one other than owner should be able to kill the contract
     it('Kill function negative condition : a call not from owner',function(){
         return Mortal.deployed().then(instance=>{
             return instance.kill({from:accounts[1]});
@@ -35,7 +35,7 @@ contract('Tests for Mortal Contract',function(accounts){
         })
     });
 
-    //Test4
+    //Only owner should be able to kill the contract
     it('Kill function : caller is owner',function(){
         return Mortal.deployed().then(instance=>{
             return instance.kill({from:accounts[0]});
@@ -45,7 +45,7 @@ contract('Tests for Mortal Contract',function(accounts){
     });
 })
 
-//Test5
+//Test self destruct functionality
 contract('Self destruct',function(accounts){
     it('self destruct testing',function(){
         return Mortal.deployed().then(instance=>{

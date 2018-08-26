@@ -5,7 +5,7 @@ import BasicForm from '../../components/Forms/BasicForm/BasicForm';
 import ArtifactCard from '../../components/Cards/ArtifactCard/ArtifactCard';
 import ImagePreviewCard from '../../components/Cards/ImagePreviewCard/ImagePreviewCard';
 import WarningModal from '../../components/Modals/WarningModal';
-import ProofOfOwnershipContract from '../../../build/contracts/ProofOfExistence.json';
+import ProofOfExistenceContract from '../../../build/contracts/ProofOfExistence.json';
 import getWeb3 from '../../utils/getWeb3';
 import ipfs from '../../ipfs/ipfs';
 
@@ -72,9 +72,9 @@ class Upload extends Component {
                 return;
             }
             this.setState({ ipfsHash: result[0].hash })
-            console.log('digest: ', this.state.digest);
-            console.log('First Name: :', this.state.firstname);
-            console.log('Last Name: :', this.state.lastName);
+            console.log('Digest: ', this.state.digest);
+            console.log('Doc Title: :', this.state.firstname);
+            console.log('Doc tags: :', this.state.lastName);
             console.log('ipfsHash: ', result[0].hash);
             console.log('account: ', this.state.account);
 
@@ -159,7 +159,7 @@ class Upload extends Component {
          */
 
         const contract = require('truffle-contract')
-        const pow = contract(ProofOfOwnershipContract)
+        const pow = contract(ProofOfExistenceContract)
         pow.setProvider(this.state.web3.currentProvider)
 
         // Declaring this for later so we can chain functions on powInstance.
@@ -167,7 +167,7 @@ class Upload extends Component {
 
 
         const publicAddress = this.state.web3.eth.coinbase.toLowerCase();
-        console.log("--------public address----------")
+        console.log("Public address...")
         console.log(publicAddress);
         
         // Get accounts.

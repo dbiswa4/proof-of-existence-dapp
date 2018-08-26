@@ -66,6 +66,7 @@ const BasicForm = (props) => {
               </Col>
               <Col xs="12" md="9">
                 <Input type="file" id="fileInput" name="fileInput" onChange={(e) => props.handleImageChange(e)} />
+                <FormText className="help-block">Only .jpg supported for now</FormText>
               </Col>
             </FormGroup>
           </Form>

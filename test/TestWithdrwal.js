@@ -2,68 +2,67 @@
 var ProofOfExistence = artifacts.require('ProofOfExistence.sol');
 var Web3 = require('web3');
 
-contract('Proof contract test suit - circuit breaker, sending ether to a contract address ', function (accounts) {
+contract('Test : Ether transfer and circuit breaker', function (accounts) {
 
     var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    let transferUnits = 3;
+    let transferAmt = 1;
 
-    it('test send ether to the proofDB contract', function () {
+    it('Send Ether from external account to contract account', function () {
 
-        let proofInstance;
-        let finalBalance;
-        let account_five = accounts[5];
+        let accountThree = accounts[3];
+        let proofOfExistenceInstance;
+        let finalBal;
+        
         ProofOfExistence.deployed().then((instance) => {
-            proofInstance = instance;
-            // console.log("initialBalance", initialBalance);
-            // sent the to contract account from external account
-            return instance.send(web3.toWei(3, "ether"), { from: account_five });
+            proofOfExistenceInstance = instance;
+            // Send ether from external account to contract account
+            return instance.send(web3.toWei(1, "ether"), { from: accountThree });
         }).then((transReceipt) => {
-            finalBalance = web3.fromWei(web3.eth.getBalance(proofInstance.address), "ether").valueOf();
-            var expected = transferUnits;
-            var actual = finalBalance;
-            assert.equal(expected, actual, "final contract balance should be 3")
+            finalBal = web3.fromWei(web3.eth.getBalance(proofOfExistenceInstance.address), "ether").valueOf();
+            var actual = finalBal;
+            var expected = transferAmt;
+            assert.equal(expected, actual, "Contract balance expected to be 1")
         })
     });
 
-    it('test checkBalance fuction of proofDB contract', function () {
-
-        let account_five = accounts[5];
+    it('Check balance of the contract account', function () {
+        let accountThree = accounts[3];
         ProofOfExistence.deployed().then((instance) => {
-            return instance.checkBalance.call({ from: account_five });
+            return instance.checkBalance.call({ from: accountThree });
         }).then((result) => {
-            let expected = transferUnits;
+            let expected = transferAmt;
             let actual = web3.fromWei(result, "ether").valueOf();
-            assert.equal(expected, actual, "final contract balance should be 3")
+            assert.equal(expected, actual, "Contract balance 1")
         })
     });
 
-    // withdrawFunds can only be involed by the owner.
-    // withdrawFunds can only be invoked when the contract is paused(circuit breaker)
-    it('test withdrawBalance fuction of proofDB contract', function () {
+    /*
+    Only owner should be able to withdraw funds from contract address. Additionally, Contract needs to be 
+    paused before funds can be transfered
+    */
+    it('Test funds withdrwal from contract address', function () {
 
-        let account_zero = accounts[0];
-        let proofInstance;
-        let initialAcctBalance;
-        let initialContractBalance;
-        let finalContractBalance;
         let finalAcctBalance;
+        let contractBal;
+        let accountZero = accounts[0];
+        let proofOfExistenceInstance;
+        let initialAcctBal;
+        let finalContractBal;
+        
         ProofOfExistence.deployed().then((instance) => {
-            proofInstance = instance;
-            initialAcctBalance = web3.fromWei(web3.eth.getBalance(account_zero), "ether").valueOf();
-            initialContractBalance = web3.fromWei(web3.eth.getBalance(proofInstance.address), "ether").valueOf();
-            // this method will pause the contract functinality(circuit breaker)
-            proofInstance.toggleContractActive({from : account_zero});
-            //console.log("initialContractBalance",initialContractBalance)
-            //console.log("initialAccctBalance",initialAcctBalance)
-            return proofInstance.withdrawFunds({ from: account_zero });
-        }).then((withDrawFundsResult) => {
-            finalAcctBalance = web3.fromWei(web3.eth.getBalance(account_zero), "ether").valueOf();
-            finalContractBalance = web3.fromWei(web3.eth.getBalance(proofInstance.address), "ether").valueOf();
-            console.log("finalAcctBalance",finalAcctBalance);
-            console.log("finalContractBalance",finalContractBalance);
-            let expected = Math.round(initialAcctBalance) + Math.round(initialContractBalance);
+            proofOfExistenceInstance = instance;
+            initialAcctBal = web3.fromWei(web3.eth.getBalance(accountZero), "ether").valueOf();
+            contractBal = web3.fromWei(web3.eth.getBalance(proofOfExistenceInstance.address), "ether").valueOf();
+            proofOfExistenceInstance.toggleContractActive({from : accountZero});
+            return proofOfExistenceInstance.withdrawFunds({ from: accountZero });
+        }).then((withdrwalFlag) => {
+            finalAcctBalance = web3.fromWei(web3.eth.getBalance(accountZero), "ether").valueOf();
+            finalContractBal = web3.fromWei(web3.eth.getBalance(proofOfExistenceInstance.address), "ether").valueOf();
+            //console.log("Final Contract Balance : ", finalContractBal);
+            let expected = Math.round(initialAcctBal) + Math.round(contractBal);
             let actual = Math.round(finalAcctBalance);
-            assert.equal(expected, actual,"final account balance ");
+            assert.equal(expected, actual,"Final External Account balance ");
+            assert.equal(0, finalContractBal,"Final Contract Account balance ");
         })
     });
 

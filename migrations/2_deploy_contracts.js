@@ -7,6 +7,7 @@ module.exports = function(deployer) {
     deployer.deploy(Owned);
     deployer.deploy(Mortal);
     deployer.deploy(Utils);
+    //Link Library contracts and application contract
     deployer.link(Utils, ProofOfExistence);
     deployer.deploy(ProofOfExistence);
 };

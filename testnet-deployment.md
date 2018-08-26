@@ -1,6 +1,6 @@
-## Testnet Deployment Details
+# Testnet Deployment Details
 
-# Ropsten
+## Ropsten
   ```
   Migrations: 0x15837d0772a0c06077c5452e2030fb2d9c6e7f2a
   Owned: 0xf3e8f6d073e0daa5375ea67c85083bfca40f2ad8
@@ -10,7 +10,7 @@
   ProofOfExistence: 0xed55bff7b1348afca10d22c2a5aff41c3d163ca
   ```
 
-# Rinkeby
+## Rinkeby
 ```
 Migrations: 0x15837d0772a0c06077c5452e2030fb2d9c6e7f2a
 Owned: 0xf3e8f6d073e0daa5375ea67c85083bfca40f2ad8
