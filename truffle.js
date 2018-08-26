@@ -2,7 +2,7 @@ var HDWalletProvider = require("truffle-hdwallet-provider");
  
 //UserInput:
 //Please update mnemonic to be able to connect to Ropsten network.
-var mnemonic = "upper ...";
+var mnemonic = "tortoise runs past... ";
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -18,6 +18,13 @@ module.exports = {
       return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/");
     },
     network_id: '3',
+    gas:4500000
+  },
+  rinkeby: {
+    provider: function() {
+      return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/");
+    },
+    network_id: '4',
     gas:4500000
   }
 }

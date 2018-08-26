@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col,Modal,ModalBody,ModalHeader } from 'reactstrap';
 import forge from 'node-forge';
 import BasicForm from '../../components/Forms/BasicForm/BasicForm';
 import ArtifactCard from '../../components/Cards/ArtifactCard/ArtifactCard';
@@ -22,7 +22,8 @@ class Upload extends Component {
         fileInput: '',
         fileBuffer: '',
         digest: '',
-        isUploaded: false
+        isUploaded: false,
+        loadingWarning : false
     }
 
     componentWillMount() {
@@ -60,12 +61,14 @@ class Upload extends Component {
         event.preventDefault();
         console.log("Clicked on Submit button ");
         console.log(this.state);
-
+        this.setState({loadingWarning:true});    
+        
         const powInstance = this.powInstance;
-
         ipfs.files.add(this.state.fileBuffer, (error, result) => {
             if (error) {
                 console.error(error);
+                this.setState({loadingWarning:false});   
+  
                 return;
             }
             this.setState({ ipfsHash: result[0].hash })
@@ -77,7 +80,8 @@ class Upload extends Component {
 
             console.log("File has been uploaded to IPFS");
 
-            powInstance.uploadDocument(this.state.digest, this.state.lastname + ", " + this.state.firstname, result[0].hash, { from: this.state.account });
+            powInstance.uploadDocument(this.state.digest, this.state.firstname + " : " + this.state.lastname, result[0].hash, { from: this.state.account });
+            this.setState({loadingWarning:false});
             //.then((result)=>{
             //    console.log("upload document result: " , result)
 
@@ -198,7 +202,7 @@ class Upload extends Component {
                     <ImagePreviewCard fileBuffer={this.state.imagePreview} />
                     <ArtifactCard
                         fileInput={this.state.fileInput}
-                        name={this.state.firstname + " " + this.state.lastname}
+                        name={this.state.firstname + " : " + this.state.lastname}
                         email={this.state.email}
                         timestamp={this.state.dateInput}
                         docHash={this.state.digest}
@@ -221,6 +225,11 @@ class Upload extends Component {
 
         return (
             <div>
+              <Modal color="primary" isOpen={this.state.loadingWarning} >
+                  <ModalBody>
+                        Uploading the document. Please wait...
+                  </ModalBody>
+               </Modal>
                 <Container fluid>
                     <Row>
                         <Col xs="12" md="6" xl="6">

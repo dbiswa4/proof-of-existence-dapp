@@ -49,6 +49,7 @@ contract ProofOfExistence is Mortal{
     //Events for logging
     event LogDocumentRequest(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes);
     event LogAssignAdmin(address _sender, string _message);
+    event LogFallback(address _sender,uint _value);
 
     //Modifiers
     modifier onlyOwner(){require(msg.sender == owner, "msg sender is not owner"); _;}
@@ -58,7 +59,7 @@ contract ProofOfExistence is Mortal{
 
     //Circuit Breaker to pause the contract in case of Emergency
     function toggleContractActive() public 
-    onlyAdmin {
+    onlyOwner {
         stopped = !stopped;
     }
 
@@ -133,7 +134,7 @@ contract ProofOfExistence is Mortal{
             usersUsage[msg.sender].count = 1;
             //Log document upload event
             emit LogDocumentRequest(msg.sender, _docTags,_docHash, block.timestamp, _ipfsHash, "Upload Success - Throtling count reset");
-                                                    //(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
+
         } else if (choice == UploadChoices.UPLOAD_CNT_INCR) {
             updateOnChainData(_docHash,_docTags,_ipfsHash);
             usersUsage[msg.sender].count += 1;
@@ -202,7 +203,6 @@ contract ProofOfExistence is Mortal{
         
         Document storage document = users[msg.sender].documentDetails[_docHash];
         emit LogDocumentRequest(msg.sender,document.docTags,document.docHash, document.docTimestamp,document.ipfsHash, "Doc Fetch Req");
-                                                //(address _addr,string _docTags, bytes32 _dochash, uint _docTimestamp, string _ipfsHash, string _notes)
         return(document.docHash, document.docTags, document.docTimestamp, document.ipfsHash);
     }
 
@@ -213,10 +213,27 @@ contract ProofOfExistence is Mortal{
         return users[msg.sender].documentList;
     }
 
-    //Returns Document hash and user name
-    function fetchAllDocumentsDetails() public 
-    view 
-    returns(bytes32[]){
-        return(users[msg.sender].documentList);
+    //this method will let he owner withdraw funds sent to the contract account.
+    function withdrawFunds() public 
+    onlyOwner 
+    onlyInEmergency
+    returns(bool){
+        uint bal = address(this).balance;
+        msg.sender.transfer(bal);
+        return true;
+    }
+    
+    function checkBalance() 
+    public 
+    view
+    returns(uint) {
+        return address(this).balance;
+    }
+
+    //Fallback function
+    function () public payable {         
+        //Secutiry measure to stop user to send any malicious content alongwith the transaction
+        require(msg.data.length == 0,"oops!!! Data length should be zero");         
+        emit LogFallback(msg.sender,msg.value);     
     }
 }
