@@ -26,7 +26,7 @@ class Verify extends Component {
         warning: false,
         info: false,
         contractResponse: {
-            name: "",
+            docTags: "",
             email: "",
             timestamp: "",
             isPresent: null
@@ -79,7 +79,7 @@ class Verify extends Component {
     handleReset = () => {
         console.log("Inside handleReset ")
         document.getElementById("document-verification-form").reset();
-        this.setState({ name: '', email: '', dateInput: '', textAreaInput: '', fileInput: '', imagePreviewUrl: '', digest: '', blockchainDigest: '' });
+        this.setState({ docTags: '', email: '', dateInput: '', textAreaInput: '', fileInput: '', imagePreviewUrl: '', digest: '', blockchainDigest: '' });
         console.log(this.state)
     }
 
@@ -143,12 +143,12 @@ class Verify extends Component {
                 console.log("final result");
                 console.log("Verify: Instatiate Contract: result", result);
 
-                if (result[0] != 0x0) {
+                if (result[0] !== 0x0) {
                     console.log("result state set")
-                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2].valueOf(), ipfsHash: result[3], name: "userName",email:"abc@abc.com", isPresent: true }, warning: true });
+                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2].valueOf(), ipfsHash: result[3], docTags: result[1],email:"todo@rocketmail.com", isPresent: true }, warning: true });
                 } else {
                     console.log("result2 = empty")
-                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2], ipfsHash: result[3], name: "userName",email:"abc@abc.com", isPresent: false }, warning: true })
+                    return this.setState({ contractResponse: { hash: result[0], timestamp: result[2], ipfsHash: result[3], docTags: result[1],email:"todo@rocketmail", isPresent: false }, warning: true })
                 }
             }).catch(error => {
                 console.log("----------error---------")
@@ -180,8 +180,7 @@ class Verify extends Component {
                     <ImagePreviewCard fileBuffer={ipfsUrl} />
                     <ArtifactCard
                         fileInput={this.state.contractResponse.fileInput}
-                        name={this.state.contractResponse.name}
-                        email={this.state.contractResponse.email}
+                        name={this.state.contractResponse.docTags}
                         timestamp={this.state.contractResponse.timestamp}
                         docHash={this.state.contractResponse.hash}
                         ipfsHash={this.state.contractResponse.ipfsHash} />

@@ -18,14 +18,6 @@ const artifactCard = (props) => {
                         </Row>
                         <Row>
                             <Col xs="12" md="3" xl="3">
-                                <Label htmlFor="textarea-input">E-mail</Label>
-                            </Col>
-                            <Col xs="12" md="6" xl="6">
-                                <Label>{props.email}</Label>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs="12" md="3" xl="3">
                                 <Label htmlFor="textarea-input">Timestamp</Label>
                             </Col>
                             <Col xs="12" md="6" xl="6">

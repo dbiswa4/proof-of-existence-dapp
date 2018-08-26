@@ -2,7 +2,7 @@ var Utils = artifacts.require('Utils.sol');
 
 contract('Tests for Utils Library',function(accounts){
 
-        //Test1
+        //Testing string length utility function
         it('Test String length check method',function(){
             return Utils.deployed().then( function(instance){
                 return instance.utfStringLength.call('validation',{from:accounts[0]});

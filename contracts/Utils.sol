@@ -1,7 +1,14 @@
 pragma solidity ^0.4.18;
 
+/*
+This is library contract. Purpose is to keep commonly used functions which
+does not change state in Blockchain to keep at one place so that they can be reused.
+*/
 library Utils {
-        
+    /*
+    To find the length of a string passed.
+    It will work for UTF-8 chars as well
+    */
     function utfStringLength(string str) 
     public 
     pure
