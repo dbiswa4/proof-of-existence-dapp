@@ -65,11 +65,13 @@ contract UserBal is Mortal{
         */
     function getTokenBal(string _assetSymbol) public 
     view
-    onlyOwner
     returns(uint256){
-       // if(!isStringAcceptable(_assetSymbol)) {
-        //    return 0;
-        //}
+        if (!isStringAcceptable(_assetSymbol)) {
+            return 0;
+        }
+        if (userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity == 0) {
+            return 0;
+        } 
         return userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
     }
 
