@@ -13,13 +13,13 @@ contract UserBal is Mortal{
     mapping(address => bool) admins;
 
     struct Asset {
-        bytes32 assetSymbol;
+        string assetSymbol;
         uint256 assetQuantity;
     }
     struct User {
         address addr;
         //Asset Symbol is map key
-        mapping(bytes32 => Asset) assetsMap;
+        mapping(string => Asset) assetsMap;
     }
     //To identify user by an Ethereum address
     mapping (address => User) userHoldings;
@@ -46,7 +46,7 @@ contract UserBal is Mortal{
     }
 
     /** @dev Fetch a particular token bal
-        * @param token symbol
+        * @param _str symbol
         * @return uploadChoices constant.
         */
     function isStringAcceptable(string _str) 
@@ -60,56 +60,46 @@ contract UserBal is Mortal{
     }
 
     /** @dev Fetch one particular token bal
-        * @param token symbol
+        * @param _assetSymbol symbol
         * @return uploadChoices constant.
         */
-    function getTokenBal(bytes32 _assetSymbol) public 
+    function getTokenBal(string _assetSymbol) public 
     view
     onlyOwner
     returns(uint256){
-        if(!isStringAcceptable(_assetSymbol)) {
-            return false;
-        }
-        return userHoldings[msg.sender].assetsMap[_assetSymbol];
+       // if(!isStringAcceptable(_assetSymbol)) {
+        //    return 0;
+        //}
+        return userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
     }
 
     /** @dev Fetch all token balance
         * @return Array of struct containing asset symbol and quantity
         */
+
+    /**
     function getTokensBal() public 
     view
     onlyOwner
     returns(Asset[]){
         return userHoldings[msg.sender].assetsMap;
     }
+    */
 
     /** @dev Check whether user has sufficent balance of a particulat token
         * @return bool
         */
-    function isSufficientBal(bytes32 _assetSymbol, uint256 _withdrwalQuantity) public 
-    view
-    onlyOwner
-    returns(uint256){
-        uint256 bal = userHoldings[msg.sender].assetsMap[_assetSymbol];
-        if (bal.sub(_withdrwalQuantity) > 0)
-            return true;
-        return false;
-    }
-
-    /** @dev Check whether user has sufficent balance of a particulat token
-        * @return bool
-        */
-    function isSufficientBal(bytes32 _assetSymbol, uint256 _withdrwalQuantity) public 
+    function isSufficientBal(string _assetSymbol, uint256 _withdrwalQuantity) public 
     view
     onlyOwner
     returns(bool){
-        uint256 bal = userHoldings[msg.sender].assetsMap[_assetSymbol];
+        uint256 bal = userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
         if (bal.sub(_withdrwalQuantity) > 0)
             return true;
         return false;
     }
 
-    function updateOnChainHoldings(bytes32 _assetSymbol,uint256 _withdrwalQuantity) 
+    function updateOnChainHoldings(string _assetSymbol,uint256 _withdrwalQuantity) 
     private
     returns(bool) {
         userHoldings[msg.sender].addr = msg.sender;

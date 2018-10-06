@@ -9,5 +9,7 @@ module.exports = function(deployer) {
     deployer.deploy(Utils);
     //Link Library contracts and application contract
     deployer.link(Utils, ProofOfExistence);
+    deployer.link(Utils, UserBal);
     deployer.deploy(ProofOfExistence);
+    deployer.deploy(UserBal);
 };
