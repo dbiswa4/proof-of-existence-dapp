@@ -28,7 +28,7 @@ contract UserBal is Mortal{
     mapping (address => User) userLockedins;
 
     //Events for logging
-    event LogFallback(address _sender,uint _value);
+    event LogFallback(address _sender,uint _value, string _note);
 
     //Modifiers
     //To restrict only to owner
@@ -93,7 +93,6 @@ contract UserBal is Mortal{
         */
     function isSufficientBal(string _assetSymbol, uint256 _withdrwalQuantity) public 
     view
-    onlyOwner
     returns(bool){
         uint256 bal = userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
         if (bal.sub(_withdrwalQuantity) > 0)
@@ -102,13 +101,24 @@ contract UserBal is Mortal{
     }
 
     function updateOnChainHoldings(string _assetSymbol,uint256 _withdrwalQuantity) 
-    private
+    public
+    onlyOwner
     returns(bool) {
         userHoldings[msg.sender].addr = msg.sender;
         uint256 curBal = userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
         require(curBal.sub(_withdrwalQuantity) > 0, "Remainder balance should be greater than Zero");
         userHoldings[msg.sender].assetsMap[_assetSymbol] = Asset(_assetSymbol, curBal.sub(_withdrwalQuantity));
         return true;
+    }
+
+    function addOnChainHoldings(string _assetSymbol,uint256 _quantity) 
+    public
+    onlyOwner
+    returns(uint256) {
+        userHoldings[msg.sender].addr = msg.sender;
+        userHoldings[msg.sender].assetsMap[_assetSymbol] = Asset(_assetSymbol, _quantity);
+        //Return current balance
+        return userHoldings[msg.sender].assetsMap[_assetSymbol].assetQuantity;
     }
 
     /** @dev Returns current balance in the contract
@@ -140,7 +150,7 @@ contract UserBal is Mortal{
     function () public payable {         
         //Secutiry measure to stop user to send any malicious content alongwith the transaction
         require(msg.data.length == 0,"oops!!! Data length should be zero");         
-        emit LogFallback(msg.sender,msg.value);     
+        emit LogFallback(msg.sender,msg.value, "Thank You!!!");     
     }
 
 }
